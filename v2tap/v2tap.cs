@@ -7,9 +7,6 @@ namespace v2tap
 {
     public static class v2tap
     {
-        // tun2socks: https://github.com/eycorsican/go-tun2socks
-        // v2ray: https://github.com/v2ray/v2ray-core
-
         public static string[] files = new string[]
         {
             "RunHiddenConsole.exe",
