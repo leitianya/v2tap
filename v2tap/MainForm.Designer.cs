@@ -30,6 +30,8 @@
         {
             this.ControlButton = new System.Windows.Forms.Button();
             this.v2rayConfigInfoGroupBox = new System.Windows.Forms.GroupBox();
+            this.v2rayConfigReadButton = new System.Windows.Forms.Button();
+            this.v2rayConfigWriteButton = new System.Windows.Forms.Button();
             this.v2rayChinaDNSTextBox = new System.Windows.Forms.TextBox();
             this.v2rayDefaultDNSTextBox = new System.Windows.Forms.TextBox();
             this.v2rayChinaDNSLabel = new System.Windows.Forms.Label();
@@ -79,6 +81,8 @@
             // 
             // v2rayConfigInfoGroupBox
             // 
+            this.v2rayConfigInfoGroupBox.Controls.Add(this.v2rayConfigReadButton);
+            this.v2rayConfigInfoGroupBox.Controls.Add(this.v2rayConfigWriteButton);
             this.v2rayConfigInfoGroupBox.Controls.Add(this.v2rayChinaDNSTextBox);
             this.v2rayConfigInfoGroupBox.Controls.Add(this.v2rayDefaultDNSTextBox);
             this.v2rayConfigInfoGroupBox.Controls.Add(this.v2rayChinaDNSLabel);
@@ -103,6 +107,28 @@
             this.v2rayConfigInfoGroupBox.TabIndex = 1;
             this.v2rayConfigInfoGroupBox.TabStop = false;
             this.v2rayConfigInfoGroupBox.Text = "v2ray 配置信息";
+            // 
+            // v2rayConfigReadButton
+            // 
+            this.v2rayConfigReadButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.v2rayConfigReadButton.Location = new System.Drawing.Point(234, 195);
+            this.v2rayConfigReadButton.Name = "v2rayConfigReadButton";
+            this.v2rayConfigReadButton.Size = new System.Drawing.Size(75, 23);
+            this.v2rayConfigReadButton.TabIndex = 18;
+            this.v2rayConfigReadButton.Text = "读取配置";
+            this.v2rayConfigReadButton.UseVisualStyleBackColor = true;
+            this.v2rayConfigReadButton.Click += new System.EventHandler(this.v2rayConfigReadButton_Click);
+            // 
+            // v2rayConfigWriteButton
+            // 
+            this.v2rayConfigWriteButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.v2rayConfigWriteButton.Location = new System.Drawing.Point(315, 195);
+            this.v2rayConfigWriteButton.Name = "v2rayConfigWriteButton";
+            this.v2rayConfigWriteButton.Size = new System.Drawing.Size(75, 23);
+            this.v2rayConfigWriteButton.TabIndex = 17;
+            this.v2rayConfigWriteButton.Text = "保存配置";
+            this.v2rayConfigWriteButton.UseVisualStyleBackColor = true;
+            this.v2rayConfigWriteButton.Click += new System.EventHandler(this.v2rayConfigWriteButton_Click);
             // 
             // v2rayChinaDNSTextBox
             // 
@@ -145,7 +171,7 @@
             this.v2rayTLSSecureCheckBox.AutoSize = true;
             this.v2rayTLSSecureCheckBox.Checked = true;
             this.v2rayTLSSecureCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.v2rayTLSSecureCheckBox.Location = new System.Drawing.Point(267, 198);
+            this.v2rayTLSSecureCheckBox.Location = new System.Drawing.Point(8, 198);
             this.v2rayTLSSecureCheckBox.Name = "v2rayTLSSecureCheckBox";
             this.v2rayTLSSecureCheckBox.Size = new System.Drawing.Size(123, 21);
             this.v2rayTLSSecureCheckBox.TabIndex = 12;
@@ -201,6 +227,7 @@
             this.v2rayServerPortTextBox.Name = "v2rayServerPortTextBox";
             this.v2rayServerPortTextBox.Size = new System.Drawing.Size(61, 23);
             this.v2rayServerPortTextBox.TabIndex = 7;
+            this.v2rayServerPortTextBox.Text = "443";
             this.v2rayServerPortTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.v2rayServerPortTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.v2rayServerPortTextBox_KeyPress);
             // 
@@ -248,6 +275,7 @@
             this.v2rayServerAddressTextBox.Name = "v2rayServerAddressTextBox";
             this.v2rayServerAddressTextBox.Size = new System.Drawing.Size(241, 23);
             this.v2rayServerAddressTextBox.TabIndex = 1;
+            this.v2rayServerAddressTextBox.Text = "www.baidu.com";
             this.v2rayServerAddressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // v2rayServerAddressLabel
@@ -483,6 +511,8 @@
         private System.Windows.Forms.Label v2rayChinaDNSLabel;
         private System.Windows.Forms.TextBox v2rayChinaDNSTextBox;
         private System.Windows.Forms.TextBox v2rayDefaultDNSTextBox;
+        private System.Windows.Forms.Button v2rayConfigReadButton;
+        private System.Windows.Forms.Button v2rayConfigWriteButton;
     }
 }
 

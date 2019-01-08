@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IniParser;
+using IniParser.Model;
 
 namespace v2tap
 {
@@ -36,8 +38,25 @@ namespace v2tap
                 File.WriteAllText("eula.txt", "");
             }
 
-            v2rayUserIDTextBox.Text = Guid.NewGuid().ToString();
-            v2rayTransferMethodComboBox.SelectedIndex = 2;
+            if (File.Exists("defaultConfig.ini"))
+            {
+                FileIniDataParser parser = new FileIniDataParser();
+                IniData data = parser.ReadFile("defaultConfig.ini");
+                v2rayServerAddressTextBox.Text = data["v2ray"]["ServerAddress"];
+                v2rayServerPortTextBox.Text = data["v2ray"]["ServerPort"];
+                v2rayUserIDTextBox.Text = data["v2ray"]["UserID"];
+                v2rayAlterIDTextBox.Text = data["v2ray"]["AlterID"];
+                v2rayTransferMethodComboBox.Text = data["v2ray"]["TransferMethod"];
+                v2rayPathTextBox.Text = data["v2ray"]["Path"];
+                v2rayDefaultDNSTextBox.Text = data["v2ray"]["DefaultDNS"];
+                v2rayChinaDNSTextBox.Text = data["v2ray"]["ChinaDNS"];
+                v2rayTLSSecureCheckBox.Checked = Boolean.Parse(data["v2ray"]["TLSSecure"]);
+            }
+            else
+            {
+                v2rayUserIDTextBox.Text = Guid.NewGuid().ToString();
+                v2rayTransferMethodComboBox.SelectedIndex = 2;
+            }
 
             using (UdpClient client = new UdpClient("114.114.114.114", 53))
             {
@@ -127,7 +146,7 @@ namespace v2tap
                             StatusLabel.Text = "当前状态：" + status;
                         });
                     }
-                    catch
+                    catch (Exception)
                     {
 
                     }
@@ -170,6 +189,61 @@ namespace v2tap
             else
             {
                 e.Handled = true;
+            }
+        }
+
+        private void v2rayConfigReadButton_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.CheckPathExists = true;
+                dialog.CheckFileExists = true;
+                dialog.Multiselect = false;
+                dialog.Filter = "配置文件 (*.ini)|*.ini";
+                
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    FileIniDataParser parser = new FileIniDataParser();
+                    IniData data = parser.ReadFile(dialog.FileName);
+
+                    v2rayServerAddressTextBox.Text = data["v2ray"]["ServerAddress"];
+                    v2rayServerPortTextBox.Text = data["v2ray"]["ServerPort"];
+                    v2rayUserIDTextBox.Text = data["v2ray"]["UserID"];
+                    v2rayAlterIDTextBox.Text = data["v2ray"]["AlterID"];
+                    v2rayTransferMethodComboBox.Text = data["v2ray"]["TransferMethod"];
+                    v2rayPathTextBox.Text = data["v2ray"]["Path"];
+                    v2rayDefaultDNSTextBox.Text = data["v2ray"]["DefaultDNS"];
+                    v2rayChinaDNSTextBox.Text = data["v2ray"]["ChinaDNS"];
+                    v2rayTLSSecureCheckBox.Checked = Boolean.Parse(data["v2ray"]["TLSSecure"]);
+                }
+            }
+        }
+
+        private void v2rayConfigWriteButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("如果需要让程序每次启动时自动载入配置文件，请将文件命令为 defaultConfig.ini 保存在程序同目录下！", "使用提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.DefaultExt = "ini";
+                dialog.AddExtension = true;
+                dialog.Filter = "配置文件 (*.ini)|*.ini";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    IniData data = new IniData();
+                    data["v2ray"]["ServerAddress"] = v2rayServerAddressTextBox.Text;
+                    data["v2ray"]["ServerPort"] = v2rayServerPortTextBox.Text;
+                    data["v2ray"]["UserID"] = v2rayUserIDTextBox.Text;
+                    data["v2ray"]["AlterID"] = v2rayAlterIDTextBox.Text;
+                    data["v2ray"]["TransferMethod"] = v2rayTransferMethodComboBox.Text;
+                    data["v2ray"]["Path"] = v2rayPathTextBox.Text;
+                    data["v2ray"]["DefaultDNS"] = v2rayDefaultDNSTextBox.Text;
+                    data["v2ray"]["ChinaDNS"] = v2rayChinaDNSTextBox.Text;
+                    data["v2ray"]["TLSSecure"] = v2rayTLSSecureCheckBox.Checked.ToString();
+
+                    File.WriteAllText(dialog.FileName, data.ToString());
+                }
             }
         }
 
