@@ -22,7 +22,7 @@ TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 - 检查适配器列表中是否多出了一个新的适配器
 
 # 正式开始
-1. 打开 `v2tap.exe` 输入你的服务器配置信息（已支持保存配置，图片没有更新，releases 也没有发布，等待中）
+1. 打开 `v2tap.exe` 输入你的服务器配置信息（已支持保存配置，图片没有更新，releases 中已发布）
 ![](screenshots/two.png)
 2. 检查最底下的适配器部分是否是你当前的内网 IP 和网关。如果不是，请手动正确选择
 ![](screenshots/three.png)
