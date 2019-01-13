@@ -1,6 +1,8 @@
 # v2tap
 TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 
+推一下自己的项目：[v2ray-installers - v2ray 一键安装脚本 支持多种模式](https://github.com/hacking001/v2ray-installers)
+
 # 待完成
 - 自动安装 TUN/TAP 驱动程序
 - 全新的界面
