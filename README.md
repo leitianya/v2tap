@@ -1,3 +1,5 @@
+[![](https://img.shields.io/badge/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F-Telegram-blue.svg)](https://t.me/Holli_Freed)
+
 # v2tap
 TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 
