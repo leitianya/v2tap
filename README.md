@@ -10,8 +10,9 @@ TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 ![](screenshots/new-two.png)
 
 # 待完成
-- 自动安装 TUN/TAP 驱动程序
-- 全新的界面
+
+- [ ] 自动安装 TUN/TAP 驱动程序
+- [ ] 全新的界面
 
 # 依赖文件
 - [tap-windows-latest-stable](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
