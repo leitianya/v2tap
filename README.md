@@ -21,9 +21,15 @@
 
 # 正式开始
 1. 打开 `v2tap.exe` 点击添加按钮增加一个配置信息
+
 ![](screenshots/one.png)
+
 ![](screenshots/two.png)
+
 2. 选择新添加的配置信息
+
 ![](screenshots/three.png)
+
 3. 检查 [Google](https://www.google.com/ncr) 是否可以正常访问
+
 ![](screenshots/four.png)
