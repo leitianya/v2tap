@@ -1,4 +1,4 @@
 @ECHO OFF
-cd v2tap
-rd /s /q bin
-rd /s /q obj
+CD v2tap
+RD /S /Q bin
+RD /S /Q obj

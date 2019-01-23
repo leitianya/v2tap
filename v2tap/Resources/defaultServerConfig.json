@@ -1,0 +1,13 @@
+[
+  {
+    "ID": "918170c7-b3cc-4fa4-aac6-c763886ffed1",
+    "Remark": "HK - BandwagonHost - 1Gbps",
+    "Address": "www.baidu.com",
+    "Port": 443,
+    "UserID": "e02d1b2d-7a22-453f-adb7-4576016df5c6",
+    "AlterId": 0,
+    "TransferMethod": "WebSockets",
+    "Path": "/",
+    "TLSSecure": true
+  }
+]

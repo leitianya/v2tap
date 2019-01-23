@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "v2tap", "v2tap\v2tap.csproj", "{2DF9C9CB-74E0-42C5-A8BC-038BE6FE5869}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "v2tap", "v2tap\v2tap.csproj", "{53132DC3-8A46-4558-978C-605A643D1300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2DF9C9CB-74E0-42C5-A8BC-038BE6FE5869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DF9C9CB-74E0-42C5-A8BC-038BE6FE5869}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DF9C9CB-74E0-42C5-A8BC-038BE6FE5869}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DF9C9CB-74E0-42C5-A8BC-038BE6FE5869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53132DC3-8A46-4558-978C-605A643D1300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53132DC3-8A46-4558-978C-605A643D1300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53132DC3-8A46-4558-978C-605A643D1300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53132DC3-8A46-4558-978C-605A643D1300}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7605EBF6-F905-47DA-9CFE-A8C0913EC205}
+		SolutionGuid = {F99FB451-F677-4A31-9F3C-4BA7BD189AF5}
 	EndGlobalSection
 EndGlobal

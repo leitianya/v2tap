@@ -1,41 +1,29 @@
 [![](https://img.shields.io/badge/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F-Telegram-blue.svg)](https://t.me/Holli_Freed)
 
 # v2tap
-TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
+基于 TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 
-推一下自己的项目：[v2ray-installers - v2ray 一键安装脚本 支持多种模式](https://github.com/hacking001/v2ray-installers)
+推一下自己项目：[v2ray-installers](https://github.com/hacking001/v2ray-installers)
 
-# 新版预告
-**最近事比较多，所以不是很快就会发布**
-
-![](screenshots/new-one.png)
-
-# 待完成
-
-- [ ] 自动安装 TUN/TAP 驱动程序
-- [ ] 全新的界面
+# TODO
+- [x] 等待添加
 
 # 依赖文件
-- [tap-windows-latest-stable](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
 - [RunHiddenConsole](https://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip)
+- [TAP Windows](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
 - [v2ray-core](https://github.com/v2ray/v2ray-core/releases)
 - [tun2socks](https://raw.githubusercontent.com/hacking001/v2tap/master/binaries/tun2socks.exe)
 
 # 准备工作
-在 [releases](https://github.com/hacking001/v2tap/releases) 里有打包好的
-- 将依赖文件准备好，和 `v2tap.exe` 一起摆放成如下样子
-![](screenshots/one.png)
-- 安装 [tap-windows-latest-stable.exe](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)，一路 next 即可
-- 可用的 v2ray 服务器
-
-# 检查工作
-- 检查适配器列表中是否多出了一个新的适配器
+1. 从 [releases](https://github.com/hacking001/v2tap/releases) 中下载最新版的包
+2. 安装 `tap-windows-latest-stable.exe`，请务必一路 next，不懂请不要乱点
+3. 可用的 v2ray 服务器（暂时不支持伪装）
 
 # 正式开始
-1. 打开 `v2tap.exe` 输入你的服务器配置信息（已支持保存配置，图片没有更新，releases 中已发布）
+1. 打开 `v2tap.exe` 点击添加按钮增加一个配置信息
+![](screenshots/one.png)
 ![](screenshots/two.png)
-2. 检查最底下的适配器部分是否是你当前的内网 IP 和网关。如果不是，请手动正确选择
+2. 选择新添加的配置信息
 ![](screenshots/three.png)
-3. 点击启动按钮即可
-4. 检查 [Google](https://www.google.com/ncr) 是否可以正常访问
+3. 检查 [Google](https://www.google.com/ncr) 是否可以正常访问
 ![](screenshots/four.png)
