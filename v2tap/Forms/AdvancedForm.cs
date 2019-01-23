@@ -67,6 +67,7 @@ namespace v2tap.Forms
             if (v2rayLoggingLevelComboBox.Text.Contains("NONE")) Global.Configs.v2rayLoggingLevel = "NONE";
 
             Utils.Util.SaveConfigsToFile();
+            MessageBox.Show("保存成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -75,6 +76,7 @@ namespace v2tap.Forms
 
             Utils.Util.InitConfigsFromFile();
             Init();
+            MessageBox.Show("重置成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Init()

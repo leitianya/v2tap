@@ -141,7 +141,7 @@ namespace v2tap.Forms
                 Global.Form.MainForm.InitProxies();
                 Utils.Util.SaveServersToFile();
 
-                MessageBox.Show("保存成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (Mode == "Edit")
             {
@@ -158,7 +158,7 @@ namespace v2tap.Forms
                 Global.Form.MainForm.InitProxies();
                 Utils.Util.SaveServersToFile();
 
-                MessageBox.Show("保存成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("保存成功", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
