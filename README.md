@@ -6,7 +6,10 @@
 推一下自己项目：[v2ray-installers](https://github.com/hacking001/v2ray-installers)
 
 # TODO
-- [x] 等待添加
+- [ ] 保存订阅链接，方便更新
+- [ ] 本地 DNS 代理（目前考虑 DoH 来拒绝污染，也支持普通 UDP 查询代理）
+- [ ] 流量速度显示（KB/s、MB/s、GB/s 自动换算单位）
+- [ ] 已用流量显示（KB/s、MB/s、GB/s 自动换算单位）
 
 # 依赖文件
 - [RunHiddenConsole](https://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip)
