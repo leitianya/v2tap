@@ -188,6 +188,7 @@
             this.StatusStrip.Location = new System.Drawing.Point(0, 163);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.Size = new System.Drawing.Size(456, 22);
+            this.StatusStrip.SizingGrip = false;
             this.StatusStrip.TabIndex = 4;
             // 
             // UplinkLabel
