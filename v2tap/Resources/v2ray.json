@@ -1,8 +1,21 @@
 {
+	"stats": {},
 	"log": {
 		"access": "logging\\v2ray-access.log",
 		"error": "logging\\v2ray-error.log",
 		"loglevel": "v2rayLoggingLevel"
+	},
+	"api": {
+		"services": [
+			"StatsService"
+		],
+		"tag": "api"
+	},
+	"policy": {
+		"system": {
+			"statsInboundUplink": true,
+			"statsInboundDownlink": true
+		}
 	},
 	"dns": {
 		"clientIP": "AdapterAddress",
@@ -28,6 +41,13 @@
 		"settings": {
 			"domainStrategy": "IPIfNonMatch",
 			"rules": [
+				{
+					"type": "field",
+					"inboundTag": [
+						"api"
+					],
+					"outboundTag": "api"
+				},
 				{
 					"type": "field",
 					"domain": [
@@ -62,6 +82,15 @@
 				]
 			},
 			"tag": "defaultInbound"
+		},
+		{
+			"listen": "127.0.0.1",
+			"port": 1020,
+			"protocol": "dokodemo-door",
+			"settings": {
+				"address": "127.0.0.1"
+			},
+			"tag": "api"
 		}
 	],
 	"outbounds": [

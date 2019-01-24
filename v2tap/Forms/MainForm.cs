@@ -10,7 +10,20 @@ namespace v2tap.Forms
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// 是否启动
+        /// </summary>
+        public static bool isStarted = false;
+
+        /// <summary>
+        /// 当前状态
+        /// </summary>
         public string Status = "等待指令中";
+
+        /// <summary>
+        /// 总流量
+        /// </summary>
+        public long UsedBandwidth = 0;
 
         public MainForm()
         {
@@ -24,6 +37,7 @@ namespace v2tap.Forms
 
             v2rayModeComboBox.SelectedIndex = 1;
 
+            // 更新时间和状态
             Task.Run(() =>
             {
                 while (true)
@@ -48,11 +62,44 @@ namespace v2tap.Forms
                     }
                 }
             });
+
+            // 更新流量信息
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (isStarted)
+                        {
+                            var channel = new Grpc.Core.Channel("localhost:1020", Grpc.Core.ChannelCredentials.Insecure);
+                            var client = new v2ray.Core.App.Stats.Command.StatsService.StatsServiceClient(channel);
+                            var uplink = client.GetStats(new v2ray.Core.App.Stats.Command.GetStatsRequest { Name = "inbound>>>defaultInbound>>>traffic>>>uplink", Reset = true });
+                            var downlink = client.GetStats(new v2ray.Core.App.Stats.Command.GetStatsRequest { Name = "inbound>>>defaultInbound>>>traffic>>>downlink", Reset = true });
+
+                            UsedBandwidth += uplink.Stat.Value;
+                            UsedBandwidth += downlink.Stat.Value;
+                            StatusStrip.Invoke((MethodInvoker)delegate
+                            {
+                                BandwidthLabel.Text = "总流量：" + Utils.Util.ProcessBandwidth(UsedBandwidth);
+                                UplinkLabel.Text = "↑：" + Utils.Util.ProcessStatusBandwidth(uplink.Stat.Value);
+                                DownlinkLabel.Text = "↓：" + Utils.Util.ProcessStatusBandwidth(downlink.Stat.Value);
+                            });
+                        }
+
+                        Thread.Sleep(1000);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
+            });
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ControlButton.Text.Contains("停止"))
+            if (isStarted)
             {
                 MessageBox.Show("请先点击关闭按钮", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Cancel = true;
@@ -141,7 +188,7 @@ namespace v2tap.Forms
         private void ControlButton_Click(object sender, EventArgs e)
         {
             Status = "正在处理中";
-            if (ControlButton.Text.Contains("启动"))
+            if (!isStarted)
             {
                 ControlButton.Enabled = false;
                 ControlButton.Text = "处理中";
@@ -217,6 +264,7 @@ namespace v2tap.Forms
                     }
 
                     Thread.Sleep(2000);
+                    isStarted = true;
                     Status = "启动完毕，请自行检查网络";
                     ControlButton.Invoke((MethodInvoker)delegate
                     {
@@ -241,6 +289,7 @@ namespace v2tap.Forms
 
                 Task.Run(() =>
                 {
+                    isStarted = false;
                     Thread.Sleep(2000);
                     Status = "正在关闭 tun2socks 服务中";
                     Utils.Util.ExecuteCommand("TASKKILL /F /T /IM tun2socks.exe");

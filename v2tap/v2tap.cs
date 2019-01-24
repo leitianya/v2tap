@@ -25,6 +25,7 @@ namespace v2tap
         {
             try
             {
+#if !DEBUG
                 // 检查文件
                 foreach (var file in RequiredFile)
                 {
@@ -34,6 +35,7 @@ namespace v2tap
                         return;
                     }
                 }
+#endif
 
                 // 日志路径
                 if (!Directory.Exists(Global.Path.LoggingDirectory)) Directory.CreateDirectory(Global.Path.LoggingDirectory);

@@ -40,7 +40,12 @@
             this.AdvancedButton = new System.Windows.Forms.Button();
             this.ControlButton = new System.Windows.Forms.Button();
             this.StatusLabel = new System.Windows.Forms.Label();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.UplinkLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.DownlinkLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.BandwidthLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.v2rayGroupBox.SuspendLayout();
+            this.StatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // v2rayGroupBox
@@ -174,11 +179,41 @@
             this.StatusLabel.TabIndex = 3;
             this.StatusLabel.Text = "当前状态：等待指令中";
             // 
+            // StatusStrip
+            // 
+            this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.UplinkLabel,
+            this.DownlinkLabel,
+            this.BandwidthLabel});
+            this.StatusStrip.Location = new System.Drawing.Point(0, 163);
+            this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.Size = new System.Drawing.Size(456, 22);
+            this.StatusStrip.TabIndex = 4;
+            // 
+            // UplinkLabel
+            // 
+            this.UplinkLabel.Name = "UplinkLabel";
+            this.UplinkLabel.Size = new System.Drawing.Size(60, 17);
+            this.UplinkLabel.Text = "↑：0KB/s";
+            // 
+            // DownlinkLabel
+            // 
+            this.DownlinkLabel.Name = "DownlinkLabel";
+            this.DownlinkLabel.Size = new System.Drawing.Size(60, 17);
+            this.DownlinkLabel.Text = "↓：0KB/s";
+            // 
+            // BandwidthLabel
+            // 
+            this.BandwidthLabel.Name = "BandwidthLabel";
+            this.BandwidthLabel.Size = new System.Drawing.Size(83, 17);
+            this.BandwidthLabel.Text = "总流量：0 KB";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 170);
+            this.ClientSize = new System.Drawing.Size(456, 185);
+            this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.ControlButton);
             this.Controls.Add(this.AdvancedButton);
@@ -194,6 +229,8 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.v2rayGroupBox.ResumeLayout(false);
             this.v2rayGroupBox.PerformLayout();
+            this.StatusStrip.ResumeLayout(false);
+            this.StatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,5 +249,9 @@
         public System.Windows.Forms.Button v2rayEditButton;
         public System.Windows.Forms.Button ControlButton;
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.StatusStrip StatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel UplinkLabel;
+        private System.Windows.Forms.ToolStripStatusLabel DownlinkLabel;
+        private System.Windows.Forms.ToolStripStatusLabel BandwidthLabel;
     }
 }
