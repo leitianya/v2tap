@@ -6,6 +6,7 @@
 推一下自己项目：[v2ray-installers](https://github.com/hacking001/v2ray-installers)
 
 # TODO
+- [ ] 给 v2tap 上一个图标
 - [ ] 本地 DNS 代理（目前考虑 DoH 来拒绝污染，也支持普通 UDP 查询代理）
 
 # 依赖文件
