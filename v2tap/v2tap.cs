@@ -8,7 +8,6 @@ namespace v2tap
     {
         public static String[] RequiredFile = new String[]
         {
-            "RunHiddenConsole.exe",
             "tun2socks.exe",
             "wv2ray.exe",
             "v2ray.exe",
