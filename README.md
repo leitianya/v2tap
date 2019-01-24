@@ -14,7 +14,7 @@
 # 依赖文件
 - [TAP Windows](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
 - [v2ray-core](https://github.com/v2ray/v2ray-core/releases)
-- [tun2socks](https://raw.githubusercontent.com/hacking001/v2tap/master/binaries/tun2socks.exe)
+- [tun2socks](https://github.com/hacking001/v2tap/tree/master/binaries)
 
 # 准备工作
 1. 从 [releases](https://github.com/hacking001/v2tap/releases) 中下载最新版的包
