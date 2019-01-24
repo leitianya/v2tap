@@ -72,7 +72,7 @@ namespace v2tap.Forms
                     {
                         if (isStarted)
                         {
-                            var channel = new Grpc.Core.Channel("localhost:1020", Grpc.Core.ChannelCredentials.Insecure);
+                            var channel = new Grpc.Core.Channel("127.0.0.1:1020", Grpc.Core.ChannelCredentials.Insecure);
                             var client = new v2ray.Core.App.Stats.Command.StatsService.StatsServiceClient(channel);
                             var uplink = client.GetStats(new v2ray.Core.App.Stats.Command.GetStatsRequest { Name = "inbound>>>defaultInbound>>>traffic>>>uplink", Reset = true });
                             var downlink = client.GetStats(new v2ray.Core.App.Stats.Command.GetStatsRequest { Name = "inbound>>>defaultInbound>>>traffic>>>downlink", Reset = true });

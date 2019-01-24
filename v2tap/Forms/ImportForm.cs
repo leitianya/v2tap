@@ -14,7 +14,8 @@ namespace v2tap.Forms
 
         private void ImportForm_Load(object sender, EventArgs e)
         {
-
+            // 读取订阅链接
+            if (File.Exists("lastSubscriptionURL.txt")) SubscriptionURLTextBox.Text = File.ReadAllText("lastSubscriptionURL.txt");
         }
 
         private void ImportForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -106,6 +107,8 @@ namespace v2tap.Forms
                 }
 
                 Global.Form.MainForm.InitProxies();
+                // 保存订阅链接
+                File.WriteAllText("lastSubscriptionURL.txt", SubscriptionURLTextBox.Text);
                 MessageBox.Show("订阅已成功导入", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
