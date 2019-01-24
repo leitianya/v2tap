@@ -8,6 +8,8 @@
 # TODO
 - [ ] 给 v2tap 上一个图标
 - [ ] 本地 DNS 代理（目前考虑 DoH 来拒绝污染，也支持普通 UDP 查询代理）
+- [x] 流量信息显示（当前上传/下载速度和已使用总流量）
+- [x] 订阅链接保存
 
 # 依赖文件
 - [RunHiddenConsole](https://redmine.lighttpd.net/attachments/660/RunHiddenConsole.zip)
