@@ -111,6 +111,7 @@
             // 
             this.v2rayModeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.v2rayModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.v2rayModeComboBox.Enabled = false;
             this.v2rayModeComboBox.FormattingEnabled = true;
             this.v2rayModeComboBox.Items.AddRange(new object[] {
             "绕过局域网",
