@@ -187,4 +187,54 @@
     <Error Condition="!Exists('..\packages\Grpc.Tools.1.18.0\build\Grpc.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.18.0\build\Grpc.Tools.targets'))" />
   </Target>
   <Import Project="..\packages\Grpc.Tools.1.18.0\build\Grpc.Tools.targets" Condition="Exists('..\packages\Grpc.Tools.1.18.0\build\Grpc.Tools.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>@echo off
+
+cd /d $(TargetDir)
+if "$(ConfigurationName)"=="Release x64" goto do64
+if "$(ConfigurationName)"=="Release x86" goto do86
+goto doNone
+
+:do64
+mkdir v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y Google.Protobuf.dll v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y Grpc.Core.dll v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y grpc_csharp_ext.x64.dll v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y Newtonsoft.Json.dll v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y System.Interactive.Async.dll v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y v2tap.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+goto doNone
+
+:do86
+mkdir v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y Google.Protobuf.dll v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y Grpc.Core.dll v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y grpc_csharp_ext.x86.dll v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y Newtonsoft.Json.dl lv2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y System.Interactive.Async.dll v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y v2tap.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+goto doNone
+
+:doNone
+exit</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@echo off
+
+cd /d $(TargetDir)
+if "$(ConfigurationName)"=="Release x64" goto do64
+if "$(ConfigurationName)"=="Release x86" goto do86
+goto doNone
+
+:do64
+rd /s /q v2tap_x64 &gt; nul 2&gt;&amp;1
+goto doNone
+
+:do86
+rd /s /q v2tap_x86 &gt; nul 2&gt;&amp;1
+goto doNone
+
+:doNone
+exit</PreBuildEvent>
+  </PropertyGroup>
 </Project>
