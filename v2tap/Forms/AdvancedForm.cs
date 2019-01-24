@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace v2tap.Forms
@@ -72,7 +73,7 @@ namespace v2tap.Forms
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            File.WriteAllText("v2tap.ini", Properties.Resources.defaultConfig);
+            File.WriteAllText("v2tap.ini", Encoding.UTF8.GetString(Properties.Resources.defaultConfig));
 
             Utils.Util.InitConfigsFromFile();
             Init();

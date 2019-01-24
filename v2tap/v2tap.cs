@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace v2tap
@@ -40,8 +41,8 @@ namespace v2tap
                 if (!Directory.Exists(Global.Path.LoggingDirectory)) Directory.CreateDirectory(Global.Path.LoggingDirectory);
 
                 // 默认配置
-                if (!File.Exists("v2tap.ini")) File.WriteAllText("v2tap.ini", Properties.Resources.defaultConfig);
-                if (!File.Exists("v2tap.json")) File.WriteAllText("v2tap.json", Properties.Resources.defaultServerConfig);
+                if (!File.Exists("v2tap.ini")) File.WriteAllText("v2tap.ini", Encoding.UTF8.GetString(Properties.Resources.defaultConfig));
+                if (!File.Exists("v2tap.json")) File.WriteAllText("v2tap.json", Encoding.UTF8.GetString(Properties.Resources.defaultServerConfig));
 
                 // 加载配置
                 Utils.Util.InitConfigsFromFile();

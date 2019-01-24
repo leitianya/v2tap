@@ -61,41 +61,22 @@ namespace v2tap.Properties {
         }
         
         /// <summary>
-        ///   查找类似 [v2tap]
-        ///TUNTAPAddress = 10.0.100.10
-        ///TUNTAPGateway = 10.0.100.1
-        ///TUNTAPNetmask = 255.255.255.0
-        ///TUNTAPDNS = 114.114.114.114,114.114.115.115
-        ///TUNTAPMetric = 100
-        ///AutoAdapterMetric = True
-        ///AutoCheckAdapter = True
-        ///v2rayLoggingLevel = DEBUG
-        /// 的本地化字符串。
+        ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static string defaultConfig {
+        internal static byte[] defaultConfig {
             get {
-                return ResourceManager.GetString("defaultConfig", resourceCulture);
+                object obj = ResourceManager.GetObject("defaultConfig", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
-        ///   查找类似 [
-        ///  {
-        ///    &quot;ID&quot;: &quot;918170c7-b3cc-4fa4-aac6-c763886ffed1&quot;,
-        ///    &quot;Remark&quot;: &quot;HK - BandwagonHost - 1Gbps&quot;,
-        ///    &quot;Address&quot;: &quot;www.baidu.com&quot;,
-        ///    &quot;Port&quot;: 443,
-        ///    &quot;UserID&quot;: &quot;e02d1b2d-7a22-453f-adb7-4576016df5c6&quot;,
-        ///    &quot;AlterId&quot;: 0,
-        ///    &quot;TransferMethod&quot;: &quot;WebSockets&quot;,
-        ///    &quot;Path&quot;: &quot;/&quot;,
-        ///    &quot;TLSSecure&quot;: true
-        ///  }
-        ///] 的本地化字符串。
+        ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static string defaultServerConfig {
+        internal static byte[] defaultServerConfig {
             get {
-                return ResourceManager.GetString("defaultServerConfig", resourceCulture);
+                object obj = ResourceManager.GetObject("defaultServerConfig", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
