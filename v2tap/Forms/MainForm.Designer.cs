@@ -111,11 +111,10 @@
             // 
             this.v2rayModeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.v2rayModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.v2rayModeComboBox.Enabled = false;
             this.v2rayModeComboBox.FormattingEnabled = true;
             this.v2rayModeComboBox.Items.AddRange(new object[] {
-            "绕过局域网",
-            "绕过局域网和中国"});
+            "[内部规则] 绕过局域网",
+            "[内部规则] 绕过局域网和中国"});
             this.v2rayModeComboBox.Location = new System.Drawing.Point(44, 51);
             this.v2rayModeComboBox.Name = "v2rayModeComboBox";
             this.v2rayModeComboBox.Size = new System.Drawing.Size(380, 24);

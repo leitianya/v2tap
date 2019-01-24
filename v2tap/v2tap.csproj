@@ -129,6 +129,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
+    <Compile Include="Objects\Mode.cs" />
     <Compile Include="Objects\Server.cs" />
     <Compile Include="Override\WebClient.cs">
       <SubType>Component</SubType>
@@ -170,6 +171,7 @@
     <None Include="Resources\defaultConfig.ini" />
     <None Include="Resources\defaultServerConfig.json" />
     <None Include="Resources\v2ray.json" />
+    <None Include="Resources\v2rayNotBypassChina.json" />
     <None Include="v2tap.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -199,6 +201,13 @@ copy /y grpc_csharp_ext.x64.dll v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y Newtonsoft.Json.dll v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y System.Interactive.Async.dll v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y v2tap.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\tap-windows-latest-stable.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\tun2socks_x64.exe v2tap_x64\tun2socks.exe &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x64\v2ray.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x64\wv2ray.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x64\v2ctl.exe v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x64\geosite.dat v2tap_x64 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x64\geoip.dat v2tap_x64 &gt; nul 2&gt;&amp;1
 goto doNone
 
 :do86
@@ -209,6 +218,13 @@ copy /y grpc_csharp_ext.x86.dll v2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y Newtonsoft.Json.dl lv2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y System.Interactive.Async.dll v2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y v2tap.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\tap-windows-latest-stable.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\tun2socks_x86.exe v2tap_x86\tun2socks.exe &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x86\v2ray.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x86\wv2ray.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x86\v2ctl.exe v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x86\geosite.dat v2tap_x86 &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\binaries\v2ray\x86\geoip.dat v2tap_x86 &gt; nul 2&gt;&amp;1
 goto doNone
 
 :doNone

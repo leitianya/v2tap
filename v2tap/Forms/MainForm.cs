@@ -32,10 +32,8 @@ namespace v2tap.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Utils.Util.InitAdapter();
             InitProxies();
-
-            v2rayModeComboBox.SelectedIndex = 1;
+            InitModes();
 
             // 更新时间和状态
             Task.Run(() =>
@@ -199,6 +197,8 @@ namespace v2tap.Forms
             Status = "正在处理中";
             if (!isStarted)
             {
+                v2rayProxyComboBox.Enabled = false;
+                v2rayModeComboBox.Enabled = false;
                 ControlButton.Enabled = false;
                 ControlButton.Text = "处理中";
 
@@ -210,7 +210,15 @@ namespace v2tap.Forms
 
                     Thread.Sleep(2000);
                     Status = "正在生成 v2ray 配置文件中";
-                    var v2rayConfig = Encoding.UTF8.GetString(Properties.Resources.v2ray);
+                    string v2rayConfig;
+                    if (v2rayModeComboBox.SelectedIndex == 1)
+                    {
+                        v2rayConfig = Encoding.UTF8.GetString(Properties.Resources.v2ray);
+                    }
+                    else
+                    {
+                        v2rayConfig = Encoding.UTF8.GetString(Properties.Resources.v2rayNotBypassChina);
+                    }
                     v2rayConfig = v2rayConfig
                         .Replace("v2rayLoggingLevel", Global.Configs.v2rayLoggingLevel.ToLower())
                         .Replace("AdapterAddress", address)
@@ -257,9 +265,13 @@ namespace v2tap.Forms
                     Thread.Sleep(2000);
                     Status = "正在配置 路由表 中";
                     Utils.Util.ExecuteCommand(String.Format("ROUTE CHANGE 0.0.0.0 MASK 0.0.0.0 {0} METRIC 1000", gateway));
-                    Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 0.0.0.0 MASK 0.0.0.0 {0} METRIC {1}", Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
+                    if (v2rayModeComboBox.SelectedIndex == (0 & 1))
+                    {
+                        Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 0.0.0.0 MASK 0.0.0.0 {0} METRIC {1}", Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
+                    }
                     Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 114.114.114.114 MASK 255.255.255.255 {0} METRIC 10", gateway));
                     Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 8.8.8.8 MASK 255.255.255.255 {0} METRIC 10", gateway));
+
                     if (Global.Configs.TUNTAPDNS.Contains(","))
                     {
                         foreach (var ip in Global.Configs.TUNTAPDNS.Split(','))
@@ -270,6 +282,16 @@ namespace v2tap.Forms
                     else
                     {
                         Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK 255.255.255.255 {1} METRIC 10", Global.Configs.TUNTAPDNS, gateway));
+                    }
+                    
+                    if (v2rayModeComboBox.SelectedIndex != (0 & 1))
+                    {
+                        index = Utils.Util.GetModeIndexByName(v2rayModeComboBox.Text.Replace("[外置规则] ", ""));
+                        
+                        foreach (var rule in Global.Modes[index].Rule)
+                        {
+                            Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK {1} {2} METRIC {3}", rule.Key, rule.Value, Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
+                        }
                     }
 
                     Thread.Sleep(2000);
@@ -312,6 +334,7 @@ namespace v2tap.Forms
                     Utils.Util.ExecuteCommand("TASKKILL /F /T /IM tun2socks.exe");
                     Utils.Util.ExecuteCommand("ROUTE DELETE 114.114.114.114");
                     Utils.Util.ExecuteCommand("ROUTE DELETE 8.8.8.8");
+
                     if (Global.Configs.TUNTAPDNS.Contains(","))
                     {
                         foreach (var ip in Global.Configs.TUNTAPDNS.Split(','))
@@ -324,9 +347,21 @@ namespace v2tap.Forms
                         Utils.Util.ExecuteCommand(String.Format("ROUTE DELETE {0}", Global.Configs.TUNTAPDNS));
                     }
 
+                    if (v2rayModeComboBox.SelectedIndex != (0 & 1))
+                    {
+                        var index = Utils.Util.GetModeIndexByName(v2rayModeComboBox.Text.Replace("[外置规则] ", ""));
+
+                        foreach (var rule in Global.Modes[index].Rule)
+                        {
+                            Utils.Util.ExecuteCommand(String.Format("ROUTE DELETE {0}", rule.Key));
+                        }
+                    }
+
                     Thread.Sleep(2000);
                     UsedBandwidth = 0;
                     Status = "停止完毕";
+                    v2rayProxyComboBox.Enabled = true;
+                    v2rayModeComboBox.Enabled = true;
                     ControlButton.Invoke(new MethodInvoker(() =>
                     {
                         ControlButton.Enabled = true;
@@ -348,6 +383,19 @@ namespace v2tap.Forms
             {
                 v2rayProxyComboBox.SelectedIndex = 0;
             }
+        }
+
+        public void InitModes()
+        {
+            v2rayModeComboBox.Items.Clear();
+            v2rayModeComboBox.Items.Add("[内置规则] 绕过局域网");
+            v2rayModeComboBox.Items.Add("[内置规则] 绕过局域网和中国");
+            foreach (var mode in Global.Modes)
+            {
+                v2rayModeComboBox.Items.Add("[外置规则] " + mode.Name);
+            }
+
+            v2rayModeComboBox.SelectedIndex = 1;
         }
     }
 }

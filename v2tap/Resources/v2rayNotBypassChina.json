@@ -1,0 +1,126 @@
+{
+	"stats": {},
+	"log": {
+		"access": "logging\\v2ray-access.log",
+		"error": "logging\\v2ray-error.log",
+		"loglevel": "v2rayLoggingLevel"
+	},
+	"api": {
+		"services": [
+			"StatsService"
+		],
+		"tag": "api"
+	},
+	"policy": {
+		"system": {
+			"statsInboundUplink": true,
+			"statsInboundDownlink": true
+		}
+	},
+	"dns": {
+		"clientIP": "AdapterAddress",
+		"hosts": {
+			"localhost": "127.0.0.1",
+			"domain:lan": "127.0.0.1",
+			"domain:arpa": "127.0.0.1",
+			"domain:local": "127.0.0.1"
+		},
+		"servers": [
+			"8.8.8.8",
+			{
+				"address": "114.114.114.114",
+				"port": 53,
+				"domains": [
+					"geosite:cn"
+				]
+			}
+		]
+	},
+	"routing": {
+		"strategy": "rules",
+		"settings": {
+			"domainStrategy": "IPIfNonMatch",
+			"rules": [
+				{
+					"type": "field",
+					"inboundTag": [
+						"api"
+					],
+					"outboundTag": "api"
+				},
+				{
+					"type": "field",
+					"ip": [
+						"geoip:private"
+					],
+					"outboundTag": "directOutbound"
+				}
+			]
+		}
+	},
+	"inbounds": [
+		{
+			"listen": "127.0.0.1",
+			"port": 1099,
+			"protocol": "socks",
+			"settings": {
+				"udp": true
+			},
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			},
+			"tag": "defaultInbound"
+		},
+		{
+			"listen": "127.0.0.1",
+			"port": 1020,
+			"protocol": "dokodemo-door",
+			"settings": {
+				"address": "127.0.0.1"
+			},
+			"tag": "api"
+		}
+	],
+	"outbounds": [
+		{
+			"sendThrough": "AdapterAddress",
+			"protocol": "vmess",
+			"settings": {
+				"vnext": [
+					{
+						"address": "v2rayServerAddress",
+						"port": v2rayServerPort,
+						"users": [
+							{
+								"id": "v2rayUserID",
+								"alterId": v2rayAlterID,
+								"security": "auto"
+							}
+						]
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "v2rayTransferMethod",
+				"security": "v2rayTLSSecure",
+				"wsSettings": {
+					"path": "v2rayPath"
+				},
+				"httpSettings": {
+					"path": "v2rayPath"
+				}
+			},
+			"tag": "defaultOutbound"
+		},
+		{
+			"sendThrough": "AdapterAddress",
+			"protocol": "freedom",
+			"settings": {},
+			"tag": "directOutbound"
+		}
+	]
+}

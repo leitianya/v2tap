@@ -209,6 +209,7 @@
             // 
             this.AdapterGatewayComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.AdapterGatewayComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AdapterGatewayComboBox.Enabled = false;
             this.AdapterGatewayComboBox.FormattingEnabled = true;
             this.AdapterGatewayComboBox.Location = new System.Drawing.Point(46, 49);
             this.AdapterGatewayComboBox.Name = "AdapterGatewayComboBox";
@@ -220,6 +221,7 @@
             // 
             this.AdapterAddressComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.AdapterAddressComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AdapterAddressComboBox.Enabled = false;
             this.AdapterAddressComboBox.FormattingEnabled = true;
             this.AdapterAddressComboBox.Location = new System.Drawing.Point(46, 18);
             this.AdapterAddressComboBox.Name = "AdapterAddressComboBox";

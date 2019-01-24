@@ -35,6 +35,11 @@ namespace v2tap
             /// tun2socks 日志
             /// </summary>
             public static string tun2socksLogging = "tun2socks.txt";
+
+            /// <summary>
+            /// 模式目录
+            /// </summary>
+            public static string ModeDirectory = "mode";
         }
 
         /// <summary>
@@ -156,8 +161,13 @@ namespace v2tap
         }
 
         /// <summary>
-        /// 服务器配置信息
+        /// 代理信息
         /// </summary>
         public static List<Objects.Server> Proxies = new List<Objects.Server>();
+
+        /// <summary>
+        /// 模式信息
+        /// </summary>
+        public static List<Objects.Mode> Modes = new List<Objects.Mode>();
     }
 }

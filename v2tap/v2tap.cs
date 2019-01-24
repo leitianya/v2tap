@@ -37,8 +37,11 @@ namespace v2tap
                 }
 #endif
 
-                // 日志路径
+                // 日志目录
                 if (!Directory.Exists(Global.Path.LoggingDirectory)) Directory.CreateDirectory(Global.Path.LoggingDirectory);
+
+                // 模式目录
+                if (!Directory.Exists(Global.Path.ModeDirectory)) Directory.CreateDirectory(Global.Path.ModeDirectory);
 
                 // 默认配置
                 if (!File.Exists("v2tap.ini")) File.WriteAllText("v2tap.ini", Encoding.UTF8.GetString(Properties.Resources.defaultConfig));
@@ -47,6 +50,10 @@ namespace v2tap
                 // 加载配置
                 Utils.Util.InitConfigsFromFile();
                 Utils.Util.InitServersFromFile();
+                Utils.Util.InitModesFromFile();
+
+                // 初始化适配器
+                Utils.Util.InitAdapter();
             }
             catch (Exception ex)
             {
