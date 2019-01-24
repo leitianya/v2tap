@@ -90,8 +90,8 @@
     <Compile Include="3rd\IniParser\StreamIniDataParser.cs" />
     <Compile Include="3rd\IniParser\StringIniParser.cs" />
     <Compile Include="3rd\SimpleJSON\SimpleJSON.cs" />
-    <Compile Include="3rd\v2ray\Command.cs" />
-    <Compile Include="3rd\v2ray\CommandGrpc.cs" />
+    <Compile Include="3rd\v2ray\Stats\Command.cs" />
+    <Compile Include="3rd\v2ray\Stats\CommandGrpc.cs" />
     <Compile Include="Forms\AdvancedForm.cs">
       <SubType>Form</SubType>
     </Compile>

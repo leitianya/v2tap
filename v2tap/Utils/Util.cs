@@ -204,6 +204,11 @@ namespace v2tap.Utils
             return -1;
         }
 
+        /// <summary>
+        /// 处理流量信息
+        /// </summary>
+        /// <param name="bandwidth">流量信息</param>
+        /// <returns>处理好的信息</returns>
         public static string ProcessBandwidth(long bandwidth)
         {
             var result = ((double)bandwidth) / 1024;
@@ -227,36 +232,6 @@ namespace v2tap.Utils
 
             result = result / 1024;
             return Math.Round(result, 2).ToString() + " TB";
-        }
-
-        /// <summary>
-        /// 处理状态流量信息
-        /// </summary>
-        /// <param name="bandwidth">流量</param>
-        /// <returns>处理好的信息</returns>
-        public static string ProcessStatusBandwidth(long bandwidth)
-        {
-            var result = ((double)bandwidth) / 1024;
-
-            if (result < 1024)
-            {
-                return Math.Round(result, 2).ToString() + " KB/s";
-            }
-
-            result = result / 1024;
-            if (result < 1024)
-            {
-                return Math.Round(result, 2).ToString() + " MB/s";
-            }
-
-            result = result / 1024;
-            if (result < 1024)
-            {
-                return Math.Round(result, 2).ToString() + " GB/s";
-            }
-
-            result = result / 1024;
-            return Math.Round(result, 2).ToString() + " TB/s";
         }
     }
 }

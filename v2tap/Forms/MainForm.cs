@@ -44,15 +44,15 @@ namespace v2tap.Forms
                 {
                     try
                     {
-                        Invoke((MethodInvoker)delegate
+                        Invoke(new MethodInvoker(() =>
                         {
                             Text = "v2tap - " + DateTime.Now.ToString();
-                        });
+                        }));
 
-                        StatusLabel.Invoke((MethodInvoker)delegate
+                        StatusLabel.Invoke(new MethodInvoker(() =>
                         {
                             StatusLabel.Text = "当前状态：" + Status;
-                        });
+                        }));
 
                         Thread.Sleep(100);
                     }
@@ -79,12 +79,21 @@ namespace v2tap.Forms
 
                             UsedBandwidth += uplink.Stat.Value;
                             UsedBandwidth += downlink.Stat.Value;
-                            StatusStrip.Invoke((MethodInvoker)delegate
+                            StatusStrip.Invoke(new MethodInvoker(() =>
                             {
                                 BandwidthLabel.Text = "总流量：" + Utils.Util.ProcessBandwidth(UsedBandwidth);
-                                UplinkLabel.Text = "↑：" + Utils.Util.ProcessStatusBandwidth(uplink.Stat.Value);
-                                DownlinkLabel.Text = "↓：" + Utils.Util.ProcessStatusBandwidth(downlink.Stat.Value);
-                            });
+                                UplinkLabel.Text = "↑：" + Utils.Util.ProcessBandwidth(uplink.Stat.Value) + "/s";
+                                DownlinkLabel.Text = "↓：" + Utils.Util.ProcessBandwidth(downlink.Stat.Value) + "/s";
+                            }));
+                        }
+                        else
+                        {
+                            StatusStrip.Invoke(new MethodInvoker(() =>
+                            {
+                                BandwidthLabel.Text = "总流量：0 KB";
+                                UplinkLabel.Text = "↑：0 KB/s";
+                                DownlinkLabel.Text = "↓：0 KB/s";
+                            }));
                         }
 
                         Thread.Sleep(1000);
@@ -266,11 +275,11 @@ namespace v2tap.Forms
                     Thread.Sleep(2000);
                     isStarted = true;
                     Status = "启动完毕，请自行检查网络";
-                    ControlButton.Invoke((MethodInvoker)delegate
+                    ControlButton.Invoke(new MethodInvoker(() =>
                     {
                         ControlButton.Enabled = true;
                         ControlButton.Text = "停止";
-                    });
+                    }));
 
                     try
                     {
@@ -316,12 +325,13 @@ namespace v2tap.Forms
                     }
 
                     Thread.Sleep(2000);
+                    UsedBandwidth = 0;
                     Status = "停止完毕";
-                    ControlButton.Invoke((MethodInvoker)delegate
+                    ControlButton.Invoke(new MethodInvoker(() =>
                     {
                         ControlButton.Enabled = true;
                         ControlButton.Text = "启动";
-                    });
+                    }));
                 });
             }
         }
