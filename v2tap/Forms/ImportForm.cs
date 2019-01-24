@@ -65,6 +65,7 @@ namespace v2tap.Forms
                         }
 
                         Global.Form.MainForm.InitProxies();
+                        File.WriteAllText("lastSubscriptionURL.txt", SubscriptionURLTextBox.Text); // 保存订阅链接
                         MessageBox.Show("订阅已成功导入", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -107,8 +108,6 @@ namespace v2tap.Forms
                 }
 
                 Global.Form.MainForm.InitProxies();
-                // 保存订阅链接
-                File.WriteAllText("lastSubscriptionURL.txt", SubscriptionURLTextBox.Text);
                 MessageBox.Show("订阅已成功导入", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
