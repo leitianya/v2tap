@@ -107,11 +107,28 @@
 			"streamSettings": {
 				"network": "v2rayTransferMethod",
 				"security": "v2rayTLSSecure",
+				"tcpSettings": {
+					"header": {
+						"type": "v2rayFakeType",
+						"request": {},
+						"response": {}
+					}
+				},
+				"kcpSettings": {
+					"header": {
+						"type": "v2rayFakeType"
+					}
+				},
 				"wsSettings": {
 					"path": "v2rayPath"
 				},
 				"httpSettings": {
 					"path": "v2rayPath"
+				},
+				"quicSettings": {
+					"header": {
+						"type": "v2rayFakeType"
+					}
 				}
 			},
 			"tag": "defaultOutbound"

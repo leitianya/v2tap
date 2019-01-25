@@ -12,6 +12,11 @@ namespace v2tap.Forms
         public string Mode;
 
         /// <summary>
+        /// 当工作于编辑模式下时指定配置索引号
+        /// </summary>
+        public int Index;
+
+        /// <summary>
         /// 默认配置
         /// </summary>
         public Objects.Server Server;
@@ -31,42 +36,64 @@ namespace v2tap.Forms
             else if (Mode == "Edit")
             {
                 Text = "编辑 - v2tap";
-                RemarkTextBox.Text = Global.Form.MainForm.v2rayProxyComboBox.Text;
-                foreach (var item in Global.Proxies)
+                RemarkTextBox.Text = Global.Proxies[Index].Remark;
+                ServerAddressTextBox.Text = Global.Proxies[Index].Address;
+                ServerPortTextBox.Text = Global.Proxies[Index].Port.ToString();
+                UserIDTextBox.Text = Global.Proxies[Index].UserID;
+                AlterIDTextBox.Text = Global.Proxies[Index].AlterID.ToString();
+                PathTextBox.Text = Global.Proxies[Index].Path;
+
+                switch (Global.Proxies[Index].TransferMethod)
                 {
-                    if (item.Remark == RemarkTextBox.Text)
-                    {
-                        ServerAddressTextBox.Text = item.Address;
-                        ServerPortTextBox.Text = item.Port.ToString();
-                        UserIDTextBox.Text = item.UserID;
-                        AlterIDTextBox.Text = item.AlterID.ToString();
-                        PathTextBox.Text = item.Path;
-                        switch (item.TransferMethod)
-                        {
-                            case "TCP":
-                                TransferMethodComboBox.SelectedIndex = 0;
-                                break;
-                            case "mKCP":
-                                TransferMethodComboBox.SelectedIndex = 1;
-                                break;
-                            case "WebSockets":
-                                TransferMethodComboBox.SelectedIndex = 2;
-                                break;
-                            case "HTTP/2":
-                                TransferMethodComboBox.SelectedIndex = 3;
-                                break;
-                            case "QUIC":
-                                TransferMethodComboBox.SelectedIndex = 4;
-                                break;
-                            default:
-                                TransferMethodComboBox.SelectedIndex = 0;
-                                break;
-                        }
-                        TLSSecureCheckBox.Checked = item.TLSSecure;
-                        Server = item;
+                    case "TCP":
+                        TransferMethodComboBox.SelectedIndex = 0;
                         break;
-                    }
+                    case "mKCP":
+                        TransferMethodComboBox.SelectedIndex = 1;
+                        break;
+                    case "WebSockets":
+                        TransferMethodComboBox.SelectedIndex = 2;
+                        break;
+                    case "HTTP/2":
+                        TransferMethodComboBox.SelectedIndex = 3;
+                        break;
+                    case "QUIC":
+                        TransferMethodComboBox.SelectedIndex = 4;
+                        break;
+                    default:
+                        TransferMethodComboBox.SelectedIndex = 0;
+                        break;
                 }
+
+                switch (Global.Proxies[Index].FakeType)
+                {
+                    case "None":
+                        FakeComboBox.SelectedIndex = 0;
+                        break;
+                    case "HTTP":
+                        FakeComboBox.SelectedIndex = 1;
+                        break;
+                    case "SRTP":
+                        FakeComboBox.SelectedIndex = 2;
+                        break;
+                    case "UTP":
+                        FakeComboBox.SelectedIndex = 3;
+                        break;
+                    case "DTLS":
+                        FakeComboBox.SelectedIndex = 4;
+                        break;
+                    case "WireGuard":
+                        FakeComboBox.SelectedIndex = 5;
+                        break;
+                    case "WeChat":
+                        FakeComboBox.SelectedIndex = 6;
+                        break;
+                    default:
+                        FakeComboBox.SelectedIndex = 0;
+                        break;
+                }
+
+                TLSSecureCheckBox.Checked = Global.Proxies[Index].TLSSecure;
             }
         }
 
@@ -145,15 +172,15 @@ namespace v2tap.Forms
             }
             else if (Mode == "Edit")
             {
-                var index = Utils.Util.GetServerIndexByID(Server.ID);
-                Global.Proxies[index].Remark = RemarkTextBox.Text;
-                Global.Proxies[index].Address = ServerAddressTextBox.Text;
-                Global.Proxies[index].Port = int.Parse(ServerPortTextBox.Text);
-                Global.Proxies[index].UserID = UserIDTextBox.Text;
-                Global.Proxies[index].AlterID = int.Parse(AlterIDTextBox.Text);
-                Global.Proxies[index].TransferMethod = TransferMethodComboBox.Text;
-                Global.Proxies[index].Path = PathTextBox.Text;
-                Global.Proxies[index].TLSSecure = TLSSecureCheckBox.Checked;
+                Global.Proxies[Index].Remark = RemarkTextBox.Text;
+                Global.Proxies[Index].Address = ServerAddressTextBox.Text;
+                Global.Proxies[Index].Port = int.Parse(ServerPortTextBox.Text);
+                Global.Proxies[Index].UserID = UserIDTextBox.Text;
+                Global.Proxies[Index].AlterID = int.Parse(AlterIDTextBox.Text);
+                Global.Proxies[Index].TransferMethod = TransferMethodComboBox.Text;
+                Global.Proxies[Index].Path = PathTextBox.Text;
+                Global.Proxies[Index].FakeType = FakeComboBox.Text;
+                Global.Proxies[Index].TLSSecure = TLSSecureCheckBox.Checked;
 
                 Global.Form.MainForm.InitProxies();
                 Utils.Util.SaveServersToFile();

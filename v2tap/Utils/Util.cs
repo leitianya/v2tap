@@ -252,60 +252,6 @@ namespace v2tap.Utils
         }
 
         /// <summary>
-        /// 取 ID 在服务器配置信息中的索引号
-        /// </summary>
-        /// <param name="text">ID</param>
-        /// <returns>索引号</returns>
-        public static int GetServerIndexByID(string text)
-        {
-            for (int i = 0; i < Global.Proxies.Count; i++)
-            {
-                if (Global.Proxies[i].ID == text)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        /// <summary>
-        /// 取备注在服务器配置信息中的索引号
-        /// </summary>
-        /// <param name="text">备注</param>
-        /// <returns>索引号</returns>
-        public static int GetServerIndexByRemark(string text)
-        {
-            for (int i = 0; i < Global.Proxies.Count; i++)
-            {
-                if (Global.Proxies[i].Remark == text)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        /// <summary>
-        /// 取名称在模式信息中的索引号
-        /// </summary>
-        /// <param name="text">备注</param>
-        /// <returns>索引号</returns>
-        public static int GetModeIndexByName(string text)
-        {
-            for (int i = 0; i < Global.Modes.Count; i++)
-            {
-                if (Global.Modes[i].Name == text)
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        /// <summary>
         /// 处理流量信息
         /// </summary>
         /// <param name="bandwidth">流量信息</param>

@@ -46,11 +46,15 @@
             this.RemarkLabel = new System.Windows.Forms.Label();
             this.ServerPortLabel = new System.Windows.Forms.Label();
             this.ControlButton = new System.Windows.Forms.Button();
+            this.FakeComboBox = new System.Windows.Forms.ComboBox();
+            this.FakeLabel = new System.Windows.Forms.Label();
             this.ConfigGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigGroupBox
             // 
+            this.ConfigGroupBox.Controls.Add(this.FakeLabel);
+            this.ConfigGroupBox.Controls.Add(this.FakeComboBox);
             this.ConfigGroupBox.Controls.Add(this.TLSSecureCheckBox);
             this.ConfigGroupBox.Controls.Add(this.AlertLabel);
             this.ConfigGroupBox.Controls.Add(this.PathTextBox);
@@ -235,11 +239,39 @@
             this.ControlButton.UseVisualStyleBackColor = true;
             this.ControlButton.Click += new System.EventHandler(this.ControlButton_Click);
             // 
+            // FakeComboBox
+            // 
+            this.FakeComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.FakeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FakeComboBox.FormattingEnabled = true;
+            this.FakeComboBox.Items.AddRange(new object[] {
+            "None",
+            "HTTP",
+            "SRTP",
+            "UTP",
+            "DTLS",
+            "WireGuard",
+            "WeChat"});
+            this.FakeComboBox.Location = new System.Drawing.Point(79, 163);
+            this.FakeComboBox.Name = "FakeComboBox";
+            this.FakeComboBox.Size = new System.Drawing.Size(163, 24);
+            this.FakeComboBox.TabIndex = 16;
+            this.FakeComboBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ComboBox_DrawItem);
+            // 
+            // FakeLabel
+            // 
+            this.FakeLabel.AutoSize = true;
+            this.FakeLabel.Location = new System.Drawing.Point(8, 166);
+            this.FakeLabel.Name = "FakeLabel";
+            this.FakeLabel.Size = new System.Drawing.Size(44, 17);
+            this.FakeLabel.TabIndex = 17;
+            this.FakeLabel.Text = "伪装：";
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 280);
+            this.ClientSize = new System.Drawing.Size(401, 284);
             this.Controls.Add(this.ControlButton);
             this.Controls.Add(this.ConfigGroupBox);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -277,5 +309,7 @@
         private System.Windows.Forms.Label PathLabel;
         private System.Windows.Forms.Button ControlButton;
         private System.Windows.Forms.CheckBox TLSSecureCheckBox;
+        private System.Windows.Forms.Label FakeLabel;
+        private System.Windows.Forms.ComboBox FakeComboBox;
     }
 }

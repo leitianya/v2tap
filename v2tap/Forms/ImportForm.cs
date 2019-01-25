@@ -149,6 +149,35 @@ namespace v2tap.Forms
                     server.TransferMethod = "QUIC";
                     break;
                 default:
+                    server.TransferMethod = "TCP";
+                    break;
+            }
+
+            switch (json["type"].Value)
+            {
+                case "none":
+                    server.FakeType = "None";
+                    break;
+                case "http":
+                    server.FakeType = "HTTP";
+                    break;
+                case "srtp":
+                    server.FakeType = "SRTP";
+                    break;
+                case "utp":
+                    server.FakeType = "UTP";
+                    break;
+                case "dtls":
+                    server.FakeType = "DTLS";
+                    break;
+                case "wireguard":
+                    server.FakeType = "WireGuard";
+                    break;
+                case "wechat-video":
+                    server.FakeType = "WeChat";
+                    break;
+                default:
+                    server.FakeType = "None";
                     break;
             }
 

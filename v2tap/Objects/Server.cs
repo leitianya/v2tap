@@ -41,7 +41,12 @@
         /// 路径
         /// </summary>
         public string Path;
-        
+
+        /// <summary>
+        /// 伪装类型
+        /// </summary>
+        public string FakeType;
+
         /// <summary>
         /// TLS 底层传输安全
         /// </summary>

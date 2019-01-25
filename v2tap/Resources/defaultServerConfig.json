@@ -8,6 +8,7 @@
     "AlterId": 0,
     "TransferMethod": "WebSockets",
     "Path": "/",
+    "FakeType": "None",
     "TLSSecure": true
   }
 ]

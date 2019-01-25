@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -157,14 +158,15 @@ namespace v2tap.Forms
         {
             try
             {
-                Global.Proxies.RemoveAt(Utils.Util.GetServerIndexByRemark(v2rayProxyComboBox.Text));
+                var index = v2rayProxyComboBox.SelectedIndex;
+                v2rayProxyComboBox.Items.RemoveAt(index);
+                Global.Proxies.RemoveAt(index);
             }
             catch (Exception)
             {
                 return;
             }
 
-            InitProxies();
             Utils.Util.SaveServersToFile();
         }
 
@@ -172,7 +174,8 @@ namespace v2tap.Forms
         {
             Global.Form.EditForm = new EditForm()
             {
-                Mode = "Edit"
+                Mode = "Edit",
+                Index = v2rayProxyComboBox.SelectedIndex
             };
             Global.Form.EditForm.Show();
             Hide();
@@ -204,7 +207,6 @@ namespace v2tap.Forms
 
                 Task.Run(() =>
                 {
-                    var index = Utils.Util.GetServerIndexByRemark(v2rayProxyComboBox.Text);
                     var address = Global.Configs.AdapterAddress[Global.Configs.AdapterAddressIndex];
                     var gateway = Global.Configs.AdapterGateway[Global.Configs.AdapterGatewayIndex];
 
@@ -222,13 +224,13 @@ namespace v2tap.Forms
                     v2rayConfig = v2rayConfig
                         .Replace("v2rayLoggingLevel", Global.Configs.v2rayLoggingLevel.ToLower())
                         .Replace("AdapterAddress", address)
-                        .Replace("v2rayServerAddress", Global.Proxies[index].Address)
-                        .Replace("v2rayServerPort", Global.Proxies[index].Port.ToString())
-                        .Replace("v2rayUserID", Global.Proxies[index].UserID)
-                        .Replace("v2rayAlterID", Global.Proxies[index].AlterID.ToString())
-                        .Replace("v2rayTLSSecure", Global.Proxies[index].TLSSecure ? "tls" : "none")
-                        .Replace("v2rayPath", Global.Proxies[index].Path);
-                    switch (Global.Proxies[index].TransferMethod)
+                        .Replace("v2rayServerAddress", Global.Proxies[v2rayProxyComboBox.SelectedIndex].Address)
+                        .Replace("v2rayServerPort", Global.Proxies[v2rayProxyComboBox.SelectedIndex].Port.ToString())
+                        .Replace("v2rayUserID", Global.Proxies[v2rayProxyComboBox.SelectedIndex].UserID)
+                        .Replace("v2rayAlterID", Global.Proxies[v2rayProxyComboBox.SelectedIndex].AlterID.ToString())
+                        .Replace("v2rayTLSSecure", Global.Proxies[v2rayProxyComboBox.SelectedIndex].TLSSecure ? "tls" : "none")
+                        .Replace("v2rayPath", Global.Proxies[v2rayProxyComboBox.SelectedIndex].Path);
+                    switch (Global.Proxies[v2rayProxyComboBox.SelectedIndex].TransferMethod)
                     {
                         case "TCP":
                             v2rayConfig = v2rayConfig.Replace("v2rayTransferMethod", "tcp");
@@ -247,6 +249,40 @@ namespace v2tap.Forms
                             break;
                         default:
                             v2rayConfig = v2rayConfig.Replace("v2rayTransferMethod", "tcp");
+                            break;
+                    }
+                    var regex = new Regex(Regex.Escape("v2rayFakeType"));
+                    switch (Global.Proxies[v2rayProxyComboBox.SelectedIndex].FakeType)
+                    {
+                        case "None":
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "none");
+                            break;
+                        case "HTTP":
+                            v2rayConfig = regex.Replace(v2rayConfig, "http", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "none");
+                            break;
+                        case "SRTP":
+                            v2rayConfig = regex.Replace(v2rayConfig, "none", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "srtp");
+                            break;
+                        case "UTP":
+                            v2rayConfig = regex.Replace(v2rayConfig, "none", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "utp");
+                            break;
+                        case "DTLS":
+                            v2rayConfig = regex.Replace(v2rayConfig, "none", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "dtls");
+                            break;
+                        case "WireGuard":
+                            v2rayConfig = regex.Replace(v2rayConfig, "none", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "wireguard");
+                            break;
+                        case "WeChat":
+                            v2rayConfig = regex.Replace(v2rayConfig, "none", 1);
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "wechat-video");
+                            break;
+                        default:
+                            v2rayConfig = v2rayConfig.Replace("v2rayFakeType", "none");
                             break;
                     }
                     File.WriteAllText("config.json", v2rayConfig);
@@ -284,11 +320,9 @@ namespace v2tap.Forms
                         Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK 255.255.255.255 {1} METRIC 10", Global.Configs.TUNTAPDNS, gateway));
                     }
                     
-                    if (v2rayModeComboBox.SelectedIndex != (0 & 1))
+                    if (v2rayModeComboBox.SelectedIndex != 0 && v2rayModeComboBox.SelectedIndex != 1)
                     {
-                        index = Utils.Util.GetModeIndexByName(v2rayModeComboBox.Text.Replace("[外置规则] ", ""));
-                        
-                        foreach (var rule in Global.Modes[index].Rule)
+                        foreach (var rule in Global.Modes[v2rayModeComboBox.SelectedIndex - 2].Rule)
                         {
                             Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK {1} {2} METRIC {3}", rule.Key, rule.Value, Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
                         }
@@ -347,11 +381,9 @@ namespace v2tap.Forms
                         Utils.Util.ExecuteCommand(String.Format("ROUTE DELETE {0}", Global.Configs.TUNTAPDNS));
                     }
 
-                    if (v2rayModeComboBox.SelectedIndex != (0 & 1))
+                    if (v2rayProxyComboBox.SelectedIndex != 0 & v2rayProxyComboBox.SelectedIndex != 1)
                     {
-                        var index = Utils.Util.GetModeIndexByName(v2rayModeComboBox.Text.Replace("[外置规则] ", ""));
-
-                        foreach (var rule in Global.Modes[index].Rule)
+                        foreach (var rule in Global.Modes[v2rayModeComboBox.SelectedIndex - 2].Rule)
                         {
                             Utils.Util.ExecuteCommand(String.Format("ROUTE DELETE {0}", rule.Key));
                         }
