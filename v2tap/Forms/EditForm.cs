@@ -32,6 +32,7 @@ namespace v2tap.Forms
             {
                 Text = "添加 - v2tap";
                 TransferMethodComboBox.SelectedIndex = 0;
+                FakeComboBox.SelectedIndex = 0;
             }
             else if (Mode == "Edit")
             {

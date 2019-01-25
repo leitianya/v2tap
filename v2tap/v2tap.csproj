@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -236,7 +236,9 @@ copy /y ..\..\..\binaries\v2ray\x64\wv2ray.exe v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x64\v2ctl.exe v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x64\geosite.dat v2tap_x64 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x64\geoip.dat v2tap_x64 &gt; nul 2&gt;&amp;1
-bc c -fmt:7z v2tap_x64\v2tap_x64.7z v2tap_x64\* &gt; nul 2&gt;&amp;1
+mkdir v2tap_x64\mode &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\modes\* v2tap_x64\mode &gt; nul 2&gt;&amp;1
+bc c -fmt:7z -r v2tap_x64\v2tap_x64.7z v2tap_x64\* &gt; nul 2&gt;&amp;1
 goto doNone
 
 :do86
@@ -254,7 +256,9 @@ copy /y ..\..\..\binaries\v2ray\x86\wv2ray.exe v2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x86\v2ctl.exe v2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x86\geosite.dat v2tap_x86 &gt; nul 2&gt;&amp;1
 copy /y ..\..\..\binaries\v2ray\x86\geoip.dat v2tap_x86 &gt; nul 2&gt;&amp;1
-bc c -fmt:7z v2tap_x86\v2tap_x86.7z v2tap_x86\* &gt; nul 2&gt;&amp;1
+mkdir v2tap_x86\mode &gt; nul 2&gt;&amp;1
+copy /y ..\..\..\modes\* v2tap_x86\mode &gt; nul 2&gt;&amp;1
+bc c -fmt:7z -r v2tap_x86\v2tap_x86.7z v2tap_x86\* &gt; nul 2&gt;&amp;1
 goto doNone
 
 :doNone
