@@ -6,12 +6,13 @@
 推一下自己项目：[v2ray-installers](https://github.com/hacking001/v2ray-installers)
 
 # TODO
-- [ ] 给 v2tap 上一个图标
+- [x] 多代理配置支持
+- [x] 可以导入订阅（自动保存上一次的订阅链接，方便更新）
+- [x] 流量信息显示（当前速度和已使用总流量）
+- [x] VMess 协议支持 + 多种传输方式 + TCP、mKCP、QUIC 的伪装支持 + 支持 UDP 转发
+- [x] 像 SSTap 那样的外置规则列表（如何创建规则参见 [wiki](https://github.com/hacking001/v2tap/wiki/CreateMode)）
 - [ ] 本地 DNS 代理（目前考虑 DoH 来拒绝污染，也支持普通 UDP 查询代理）
-- [x] 为 mKCP 和 QUIC 添加伪装支持
-- [x] 像 SSTap 那样搞一个外置规则列表
-- [x] 流量信息显示（当前上传/下载速度和已使用总流量）
-- [x] 订阅链接保存
+- [ ] 给 v2tap 上一个图标
 
 # 依赖文件
 - [TAP Windows](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
