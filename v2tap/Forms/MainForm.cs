@@ -300,13 +300,25 @@ namespace v2tap.Forms
                     
                     Thread.Sleep(2000);
                     Status = "正在配置 路由表 中";
-                    Utils.Util.ExecuteCommand(String.Format("ROUTE CHANGE 0.0.0.0 MASK 0.0.0.0 {0} METRIC 1000", gateway));
-                    if (v2rayModeComboBox.SelectedIndex == (0 & 1))
+                    if (Global.Configs.AutoAdapterMetric)
+                    {
+                        Utils.Util.ExecuteCommand(String.Format("ROUTE CHANGE 0.0.0.0 MASK 0.0.0.0 {0} METRIC 1000", gateway));
+                    }
+
+                    if (v2rayModeComboBox.SelectedIndex == 0 && v2rayModeComboBox.SelectedIndex == 1)
                     {
                         Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 0.0.0.0 MASK 0.0.0.0 {0} METRIC {1}", Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
                     }
-                    Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 114.114.114.114 MASK 255.255.255.255 {0} METRIC 10", gateway));
+                    else
+                    {
+                        foreach (var rule in Global.Modes[v2rayModeComboBox.SelectedIndex - 2].Rule)
+                        {
+                            Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK {1} {2} METRIC {3}", rule.Key, rule.Value, Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
+                        }
+                    }
+
                     Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 8.8.8.8 MASK 255.255.255.255 {0} METRIC 10", gateway));
+                    Utils.Util.ExecuteCommand(String.Format("ROUTE ADD 114.114.114.114 MASK 255.255.255.255 {0} METRIC 10", gateway));
 
                     if (Global.Configs.TUNTAPDNS.Contains(","))
                     {
@@ -318,14 +330,6 @@ namespace v2tap.Forms
                     else
                     {
                         Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK 255.255.255.255 {1} METRIC 10", Global.Configs.TUNTAPDNS, gateway));
-                    }
-                    
-                    if (v2rayModeComboBox.SelectedIndex != 0 && v2rayModeComboBox.SelectedIndex != 1)
-                    {
-                        foreach (var rule in Global.Modes[v2rayModeComboBox.SelectedIndex - 2].Rule)
-                        {
-                            Utils.Util.ExecuteCommand(String.Format("ROUTE ADD {0} MASK {1} {2} METRIC {3}", rule.Key, rule.Value, Global.Configs.TUNTAPGateway, Global.Configs.TUNTAPMetric));
-                        }
                     }
 
                     Thread.Sleep(2000);
