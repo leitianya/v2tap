@@ -14,6 +14,7 @@ namespace v2tap.Override
         {
             var request = base.GetWebRequest(address);
             request.Timeout = Timeout;
+            ((HttpWebRequest)request).ReadWriteTimeout = Timeout;
 
             return request;
         }
