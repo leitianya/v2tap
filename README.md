@@ -13,6 +13,7 @@
 - [x] 像 SSTap 那样的外置规则列表（如何创建规则参见 [wiki](https://github.com/hacking001/v2tap/wiki/CreateMode)）
 - [ ] 本地 DNS 代理（目前考虑 DoH 来拒绝污染，也支持普通 UDP 查询代理）
 - [ ] 给 v2tap 上一个图标
+- [ ] 导入界面有待改进
 
 # 依赖文件
 - [TAP Windows](https://build.openvpn.net/downloads/releases/latest/tap-windows-latest-stable.exe)
