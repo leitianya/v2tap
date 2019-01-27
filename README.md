@@ -3,8 +3,6 @@
 # v2tap
 基于 TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 
-推一下自己项目：[v2ray-installers](https://github.com/hacking001/v2ray-installers)
-
 # TODO
 - [x] 多代理配置支持
 - [x] 可以导入订阅（自动保存上一次的订阅链接，方便更新）
