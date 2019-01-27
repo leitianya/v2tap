@@ -1,5 +1,7 @@
 [![](https://img.shields.io/badge/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F-Telegram-blue.svg)](https://t.me/Holli_Freed)
 
+# 此项目已更名 x2tap 继续开发：[x2tap](https://github.com/hacking001/x2tap)
+
 # v2tap
 基于 TUN/TAP + tun2socks + v2ray 实现的 VPN 工具
 
